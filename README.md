@@ -9,13 +9,14 @@ This Project was made using lots of tutorials and is heavily commented on so tha
 -
 
 ## References:
-- [Dragon Zap Education "Creating an Emulator"](https://www.youtube.com/watch?v=ptCH3Tzra40) 
+Videos:
+- [CHIP-8 the Ultimate Tutorial Playlist](https://www.youtube.com/playlist?list=PLctbZl-jXNJ9lk3hLCp9lzw1ep_yscZq9)
+<!--- [Dragon Zap Education "Creating an Emulator"](https://www.youtube.com/watch?v=ptCH3Tzra40) (This one was skimmed through) --->
 
 Absolutely Necessary Reads:
 - [Assembler Directives(GNU)](https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_7.html)
 - [Cowgod's Chip-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM) 
-
-A lot to read but through the previous texts I was able to utilize this in order to understand some concepts
+Not necessary but some more research
 - [Austin Morlan's Chip-8 Emulator Tutorial](https://austinmorlan.com/posts/chip8_emulator/) 
 
 Other's Projects that I dissected in the making of my own project:
