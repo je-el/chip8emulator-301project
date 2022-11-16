@@ -1,10 +1,23 @@
 # chip8emulator-301project
+## About
+CHIP8 interpretor (SDL used for graphics)
 
 This Project was made using lots of tutorials and is heavily commented on so that I can gauge an understanding of the functionality of each line of code. 
-You can find links to each Tutorial utilized in the creation of this project below:
 
--[1] https://github.com/Lonami/chip8-asm64-emu //Lonami Chip8 ASM64 emulator
--[2] https://www.youtube.com/watch?v=ptCH3Tzra40 Dragon Zap Education "Creating an EMulator
--[3] http://devernay.free.fr/hacks/chip8/C8TECH10.HTM Cowgod's Chip-8 Technical Reference
--[4] https://austinmorlan.com/posts/chip8_emulator/ Austin Morlan's Chip-8 Emulator Tutorial
--[5] https://github.com/f0lg0/CHIP-8 - //by looking at other's comments throughout this process I have gotten a better understanding as to how it works and how to implement and understand what alot of the code actually DOES to make the emulator actually work
+### Requirements
+- SDL Library(for graphics)
+-
+
+## References:
+- [Dragon Zap Education "Creating an Emulator"](https://www.youtube.com/watch?v=ptCH3Tzra40) 
+
+Absolutely Necessary Read
+- [Cowgod's Chip-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM) 
+
+A lot to read but through the previous texts I was able to utilize this in order to understand some concepts
+- [Austin Morlan's Chip-8 Emulator Tutorial](https://austinmorlan.com/posts/chip8_emulator/) 
+
+Other's Projects that I dissected in the making of my own project:
+- [Lonami Chip 8 Emulator Tutorial Project](https://github.com/Lonami/chip8-asm64-emu)
+- [f0lg0's Chip-8 Emulator](https://github.com/f0lg0/CHIP-8) 
+by looking at other's comments throughout this process I have gotten a better understanding as to how it works and what alot of the code actually DOES to make the emulator actually work
