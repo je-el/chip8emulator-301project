@@ -5,8 +5,8 @@ CHIP8 interpretor (SDL used for graphics)
 This Project was made using lots of tutorials and is heavily commented on so that I can gauge an understanding of the functionality of each line of code. 
 
 ### Requirements
-- SDL Library(for graphics)
--
+<!--- SDL Library(for graphics) --->
+- C++
 
 ## References:
 Videos:
