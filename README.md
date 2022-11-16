@@ -11,7 +11,8 @@ This Project was made using lots of tutorials and is heavily commented on so tha
 ## References:
 - [Dragon Zap Education "Creating an Emulator"](https://www.youtube.com/watch?v=ptCH3Tzra40) 
 
-Absolutely Necessary Read
+Absolutely Necessary Reads:
+- [Assembler Directives(GNU)](https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_7.html)
 - [Cowgod's Chip-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM) 
 
 A lot to read but through the previous texts I was able to utilize this in order to understand some concepts
