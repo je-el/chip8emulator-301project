@@ -1,0 +1,32 @@
+the Telmac 1800 was a microcomputer from the 70's 
+the original kits later came included with an alphanumberic video display and up to 12 kB of memory
+4kB Tiny BASIC can be run on it. 
+it was one of hte first computers to run a chip8 interpreter
+
+what my system has:
+4K memory
+64x32 1-bit display
+sound = beeps
+
+implemented via a virtual machine
+my 16 frame stack:
+    16 8-bit registers (V0 - VF)
+    12-bit index register (I)
+    PC (Program Counter)
+    2 8-bit timers
+-See below for image interpretation-
+
+0x000 |--------------------|
+      | Interpreter memory |
+      |                    |
+0x050 | Built-in fontset   |
+0x200 |--------------------|
+      |                    |
+      |                    |
+      | Program memory     |
+      | and dynamic allocs |
+      |                    |
+      |                    |
+0xFFF |--------------------|
+
+
