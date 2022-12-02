@@ -12,6 +12,11 @@
 #include <cmath>
 #include <string>
 
+//defines
+
+#define NEXT program_counter_ += 2 //becasue each opcode is 2 bytes
+#define SKIP program_counter_ += 4
+
 // once Initialize is set up then we'll be able to execute a user program
 cpuchip8::Initialize(const std::string& rom) {
 
@@ -74,3 +79,155 @@ cpuchip8::Initialize(const std::string& rom) {
 
 
 }
+
+void cpuchip8::runcycle() {
+    //getting that opcode
+    current_opcode_ = memory_[program_counter_] << 8 | memory_[program_counter_ + 1];
+    auto instr = instructions_.find(current_opcode_);
+
+    if (instr != instructions_.end()) {
+        instr->second();
+    } else { throw std::runtime_error("Couldn't find that instruction for opcode " + std::to_string(current_opcode_));
+    }
+    //now to update sound and delay timerds
+}
+/* with runcycle we don't alter the prorgam counter
+as this is done function by function
+that will get done by a specific `instruction`*/
+
+/*
+chip8 uses big-endian arch so the most significant part of the word
+comes first followed by th least significant part
+this is  reversed in x86 based systems
+*/
+
+void cpuchip8::BUILDinstructionset(){
+    instructions.clear();
+    instructions.reserve(0xFFFF);
+
+    instructions_[0x00E0] = [this]() { frame_.SetAll(0); NEXT;};
+    instructions_[0x00EE] = [this]() { program_counter_ = stack_[stack_pointer_] + 2; //ret
+    };
+
+    for (int opcode = 0x1000; opcode < 0xFFFF; opcode++) {
+        uint16_t nnn = opcode & 0x0FFF;
+        uint8_t kk = opcode & 0x00FF;
+        uint8_t x = (opcode & 0x0F00) >> 8;
+        uint8_t y = (opcode & 0x00F0) >> 4;
+        uint8_t n = opcode & 0x000F;
+        
+        //each of these iinstrucitons encode parameters that we decode when needed
+        //the tutorial I am following chose to define Gen[INSTRCUTION_NAME] 
+        //rather than using std::bind to generate the std::functions
+        //it returns the funcitons as lambdas and binds all the data
+        if ((opcode & 0xF000) == 0x1000){
+            instructions_[opcode] = GenJP(nnn);
+        } else if ((opcode & 0xF000) == 0x2000) { 
+            instructions_[opcode] = GenCALL(nnn);
+        } else if ((opcode & 0xF000) == 0x3000) {
+            instructions_[opcode] = GenSE(x, kk);
+        } else if ((opcode & 0xF000) == 0x4000)
+        {
+            instructions_[opcode] = GenSNE(x, kk);
+        } else if ((opcode & 0xF00F) == 0x5000)
+        {
+            instructions_[opcode] = GenSEREG(x, y);
+        } else if ((opcode & 0xF000) == 0x6000)
+        {
+            instructions_[opcode] = GenLDIMM(x, kk);
+        } else if ((opcode & 0xF000) == 0x7000)
+        {
+            instructions_[opcode] = GenADDIMM(x, kk);
+        } else if ((opcode & 0xF00F) == 0x8000)
+        {
+            instructions_[opcode] = GenLDV(x, y);
+        } else if ((opcode & 0xF00F) == 0x8001)
+        {
+            instructions_[opcode] = GenOR(x, y);
+        } else if ((opcode & 0xF00F) == 0x8002)
+        {
+            instructions_[opcode] = GenAND(x, y);
+        } else if ((opcode & 0xF00F) == 0x8003)
+        {
+            instructions_[opcode] = GenXOR(x, y);
+        } else if ((opcode & 0xF00F) == 0x8004)
+        {
+            instructions_[opcode] = GenADD(x, y);
+        } else if ((opcode & 0xF00F) == 0x8005)
+        {
+            instructions_[opcode] = GenSUB(x, y);
+        } else if ((opcode & 0xF00F) == 0x8006)
+        {
+            instructions_[opcode] = GenSHR(x);
+        } else if ((opcode & 0xF00F) == 0x8007)
+        {
+            instructions_[opcode] = GenSUBN(x, y);
+        } else if ((opcode & 0xF00F) == 0x800E)
+        {
+            instructions_[opcode] = GenSHL(x);
+        } else if ((opcode & 0xF00F) == 0x9000)
+        {
+            instructions_[opcode] = GenSNEREG(x, y);
+        } else if ((opcode & 0xF000) == 0xA000)
+        {
+            instructions_[opcode] = GenLDI(nnn);
+        } else if ((opcode & 0xF000) == 0xB000)
+        {
+            instructions_[opcode] = GenJPREG(nnn);
+        } else if ((opcode & 0xF000) == 0xC000)
+        {
+            instructions_[opcode] = GenRND(x, kk);
+        } else if ((opcode & 0xF000) == 0xD000)
+        {
+            instructions_[opcode] = GenDRAW(x, y, n);
+        } else if ((opcode & 0xF0FF) == 0xE09E)
+        {
+            instructions_[opcode] = GenSKEY(x);
+        } else if ((opcode & 0xF0FF) == 0xE0A1)
+        {
+            instructions_[opcode] = GenSNKEY(x);
+        } else if ((opcode & 0xF0FF) == 0xF007)
+        {
+            instructions_[opcode] = GenRDELAY(x);
+        } else if ((opcode & 0xF0FF) == 0xF00A)
+        {
+            instructions_[opcode] = GenWAITKEY(x);
+        } else if ((opcode & 0xF0FF) == 0xF015)
+        {
+            instructions_[opcode] = GenWDELAY(x);
+        } else if ((opcode & 0xF0FF) == 0xF018)
+        {
+            instructions_[opcode] = GenWSOUND(x);
+        } else if ((opcode & 0xF0FF) == 0xF01E)
+        {
+            instructions_[opcode] = GenADDI(x);
+        } else if ((opcode & 0xF0FF) == 0xF029)
+        {
+            instructions_[opcode] = GenLDSPRITE(x);
+        } else if ((opcode & 0xF0FF) == 0xF033)
+        {
+            instructions_[opcode] = GenSTBCD(x);
+        } else if ((opcode & 0xF0FF) == 0xF055)
+        {
+            instructions_[opcode] = GenSTREG(x);
+        } else if ((opcode & 0xF0FF) == 0xF065)
+        {
+            instructions_[opcode] = GenLDREG(x);
+        }
+    }
+}
+
+//when we JP to an addr we set the counter = to the addr so the next cycle executes from that point
+cpuchip8::Instruction cpuchip8::GenJP(uint16_t addr) {
+    return [this, addr]() { program_counter_ = addr;};
+
+}
+
+cpuchip8::Instruction cpuchip8::GenCALL(uint16_t addr){
+    return [this, addr](){
+        stack_[stack_pointer_++] = program_counter_;
+        program_counter_ = addr;
+    };
+} //with call it is the same as JP but we have to return 
+// so we storethe counter to the stack
+
