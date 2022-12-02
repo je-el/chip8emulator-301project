@@ -12,6 +12,7 @@
 #include <cmath>
 #include <string>
 
+// once Initialize is set up then we'll be able to execute a user program
 cpuchip8::Initialize(const std::string& rom) {
 
     current_opcode_ = 0;
