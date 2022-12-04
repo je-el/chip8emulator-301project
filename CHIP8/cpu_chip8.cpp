@@ -231,3 +231,50 @@ cpuchip8::Instruction cpuchip8::GenCALL(uint16_t addr){
 } //with call it is the same as JP but we have to return 
 // so we storethe counter to the stack
 
+cpuchip8::Instruction cpuchip8::GenADD(uint8_t reg_x, uint8_t reg_y){
+    return [this, reg_x, reg_y](){
+        uint16_t res = v_registers_[reg_x] += v_registers_[reg_y];
+        v_registers_[0xF] = res > 0xFF; //set carry
+        v_registers_[reg_x] = res;
+        NEXT;
+    };
+}
+cpuchip8::Instruction cpuchip8::GenSUB(uint8_t reg_x, uint8_t reg_y){
+    return [this, reg_x, reg_y](){
+        uint16_t res = v_registers_[reg_x] > v_registers_[reg_y]; // set not borrow
+        v_registers_[reg_x] = res;
+        NEXT;
+    }; 
+} //we need to keep track of the overflow so we check for it and if it
+// is detected then we set VF
+
+
+/* VV my sprite loading function VV*/
+cpuchip8::Instruction cpuchip8::GenLDSSPRITE(uint8_t reg){
+    return [this, reg](){
+        uint8_t digit = v_registers_[reg];
+        index_register_ = 0x50 + ( 5* digit);
+        NEXT;
+    };
+}
+// the fonset is stored at 0x50 and eaxh character is 5 bytes wide
+// we set I to ox50 + (5 * digit)
+//the program will use it to figure out where a digit is inside the fontset
+
+cpuchip8::Instruction cpuchip8::GenSTREG(uint8_t reg){
+    return [this, reg]() {
+        for (uint8_t v = 0; v <= reg; v++){
+            memory_[index_register_ + v] = v_registers_[v];
+        }
+        NEXT;
+    };
+}
+cpuchip8::Instruction cpuchip8::GenLDREG(uint8_t reg){
+    return [this, reg]() {
+        for (uint8_t v = 0; v <= reg; v++){
+            v_registers_[v] = memory_[index_register_ + v];
+        }
+        NEXT;
+    };
+}
+//
