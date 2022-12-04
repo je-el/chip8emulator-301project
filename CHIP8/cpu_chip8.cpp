@@ -277,4 +277,6 @@ cpuchip8::Instruction cpuchip8::GenLDREG(uint8_t reg){
         NEXT;
     };
 }
-//
+//the user provides the register they wanna use
+//when they load either register V0, V1, or V2 the values stored 
+//in MEM[I] they would pass in V2 after setting up I

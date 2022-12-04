@@ -6,6 +6,8 @@
 #include <functional>
 #include <atomic>
 
+#include "common_headers.h"
+#include "Image.h"
 class cpuchip8 {
     public:
         public Initialize(const std::string& rom);
@@ -42,7 +44,8 @@ class cpuchip8 {
         //into the class between cycles
         //all chip8 instructions are 2 bytes long
 
-        //mem map will be made in the Initialize function checkout cpu_chip8.cpp
+        //mem map will be made in the Initialize function 
+        //checkout cpu_chip8.cpp
         
 };
 

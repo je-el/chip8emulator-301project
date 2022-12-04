@@ -30,3 +30,16 @@ my 16 frame stack:
 0xFFF |--------------------|
 
 
+we'll encapsulate our image memory and operations in an Image class and the 64x32 frame will 
+be represented as a single chunk of data memoryeach pixel will be a single byte
+
+0x000:|--------------------------------------------------------------|
+0x040:|                                                              |
+0x080:|                                                              |
+0x0C0:|                                                              |
+      ...
+0x7C0:|--------------------------------------------------------------|
+
+This will be our display we need to make sure to keep track of the 
+columns and rows and we'll use malloc to keep track of the starting address of the image memory
+it should point to the top left corner of the memory 
