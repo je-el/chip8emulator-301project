@@ -34,3 +34,8 @@ void Image::DrawToStdout() {
     }
     std::cout<<std::endl;
 }
+//we will use drawto std out for now sp we can draw graphically to the console
+// just until we set up the actual output
+
+
+//see notes at #drawing to the console

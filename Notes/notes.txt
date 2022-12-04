@@ -43,3 +43,23 @@ be represented as a single chunk of data memoryeach pixel will be a single byte
 This will be our display we need to make sure to keep track of the 
 columns and rows and we'll use malloc to keep track of the starting address of the image memory
 it should point to the top left corner of the memory 
+
+#drawing to the console
+all drawing is done by xor operation 
+all sprites are defined as images with a depth of 1-bit a width of 8 and variable height
+width limitation is becasue the sprite is only 1 bit
+so for example:
+
+0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
+
+0xF0 is 1111 0000 -> XXXX
+0x90 is 1001 0000 -> X  X
+0x90 is 1001 0000 -> X  X
+0x90 is 1001 0000 -> X  X
+0xF0 is 1111 0000 -> XXXX
+
+the reason you see flickering in chip8 programs screen is becasue
+of the operation used for the sprites
+are drawn over oneanother
+so that is why we use the xor operation
+

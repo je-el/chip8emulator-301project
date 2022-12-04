@@ -10,9 +10,19 @@
 #include "Image.h"
 class cpuchip8 {
     public:
+        constexpr int kFrameWidth = 64;
+        constexpr int kFrameHeight = 32;
+        
+        cpuchip8() : frame_(kFrameWidth, kFrameHeight){}        
+        
+        
         public Initialize(const std::string& rom);
         void runcycle();
+        
     private:
+
+        Image frame_;
+        
         //our instructions
         void BUILDinstructionset();
 
