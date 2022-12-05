@@ -2,6 +2,8 @@
 #include "common_headers.h"
 #include <iostream>
 #include <exception>
+#include "cpu_chip8.h"
+//
 
 //chip 8 class will hold onto the state of the machine and interpreter 
 void RUN() {
