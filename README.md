@@ -5,9 +5,14 @@ My CHIP8 interpretor /virtual machine
 For Main Project Code look at [CHIP8](https://github.com/je-el/chip8emulator-301project/tree/main/CHIP8)  
   
 *In reality this is all simulation.* *(I say as a jest pointing toward my unused video game consoles)*  
-  
+#### My Goals, Milestones, and Thoughts 
+My main goal in this project is to understand how the interpretor works and in what ways I could possibly improve it. My main struggle when I began this project was finding information on how to make it work on my Mac OS systems. As I mainly use Mac Computers. After researching the technical references via [CowGods Chip8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM) and following along with [River Gillis Tutorial for creating a CHIP-8 Interpreter and virtual machine to run it](https://riv.dev/emulating-a-computer-part-1/) I felt that I was ready enough to begin exploring more possiblities with the Chip8 Interpreter.  
+In the near future I plan on using the Emulator/Interpreter to create a firewall worm, and I will keep track of that progress in a repo that will fork this project over.  
 This Project was made using lots of tutorials and is heavily commented on so that I can gauge an understanding of the functionality of each line of code. 
-
+  
+##### Final Comment:
+Originally I wanted this to work as expected and write it in complete asm, but as I went along I kept running into issues whether it be technical issues with the fact that I was writing this entirely on a MacOS system and it not compiling or just running into the issue of understanding why the assembly was taking so long to write. eventually I opted for writing the program in C++ and following three seperate tutorials to understand what is actually happening in the program. I hope that all of my comments will be useful for someone else in understanding what is going on when they write an emulator.  
+Eventually I want to turn this emulator into a Worm that can break through firewalls, as I think that might be an interesting project to work on.  
 ### Requirements
 - SDL Library(for graphics) ---> [See Absolutely Necessary Reads](#absolutely-necessary-reads)
 - C++

@@ -10,13 +10,13 @@
 #include "Image.h"
 class cpuchip8 {
     public:
-        constexpr int kFrameWidth = 64;
-        constexpr int kFrameHeight = 32;
+        static constexpr int kFrameWidth = 64;
+        static constexpr int kFrameHeight = 32;
         
         cpuchip8() : frame_(kFrameWidth, kFrameHeight){}        
         
         
-        public Initialize(const std::string& rom);
+        void Initialize(const std::string& rom);
         void runcycle();
         
     private:
@@ -27,7 +27,7 @@ class cpuchip8 {
         void BUILDinstructionset();
 
         using Instruction = std::function<void(void)>;
-        std::unordered_map < uint16_t, Instruction>> instructions_;
+        std::unordered_map < uint16_t, Instruction >> instructions_;
 
         uint16_t current_opcode_;
 
