@@ -1,17 +1,15 @@
+
 //headers from program
 #include "cpu_chip8.h"
-
+#include "common_headers.h"
 //inbuilt headers
 #include <thread>
 #include <atomic>
 #include <fstream>
-#include <iostream>
 #include <chrono>
 #include <iterator>
 #include <vector>
 #include <cmath>
-#include <string>
-
 //defines
 
 #define NEXT program_counter_ += 2 //becasue each opcode is 2 bytes
