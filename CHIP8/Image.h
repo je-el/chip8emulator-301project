@@ -15,6 +15,10 @@ class Image {
 
         void SetAll(uint8_t value);
 
+        void DrawToStdout();
+
+        //void XOR(int c, int r, uint8_t val);
+
     private:
         int cols_;
         int rows_;

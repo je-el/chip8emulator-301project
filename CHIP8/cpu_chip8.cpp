@@ -280,3 +280,13 @@ cpuchip8::Instruction cpuchip8::GenLDREG(uint8_t reg){
 //the user provides the register they wanna use
 //when they load either register V0, V1, or V2 the values stored 
 //in MEM[I] they would pass in V2 after setting up I
+
+cpuchip8::Instruction cpuchip8::GenDraw(uint8_t reg_x, uint8_t reg_y, uint8_t n_rows){
+    return [this, reg_x, reg_y, n_rows](){
+        uint8_t x_coord = v_registers_[reg_x];
+        uint8_t y_coord = v_registers_[reg_y];
+        bool pixels_unset = frame_.XORSprite(x_coord, y_coord, n_rows, memory_ + index_register_);
+        v_registers_[0xF] = pixels_unset;
+        NEXT;
+    };
+}

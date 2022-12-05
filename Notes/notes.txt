@@ -63,3 +63,4 @@ of the operation used for the sprites
 are drawn over oneanother
 so that is why we use the xor operation
 
+MSbit to LSbit

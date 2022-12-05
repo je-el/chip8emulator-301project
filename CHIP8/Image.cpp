@@ -1,5 +1,7 @@
-#include "Image.h"
+
 #include "common_headers.h"
+#include "Image.h"
+#include "cpu_chip8.h"
 
 #include <iomanip>
 
@@ -39,3 +41,38 @@ void Image::DrawToStdout() {
 
 
 //see notes at #drawing to the console
+//the interpreter also need to recieve back whether ot not  a pixel was turned off
+// this i sused for collision detection
+//remmeber that we xor to draw over with the sprites
+
+//returns true if the new value unsets the pixel
+bool Image::XOR(int c, int r, uint8_t val){
+    uint8_t& current_val = At(c,r);
+    uint8_t prev_val = current_val;
+    current_val ^= val;
+    return current_val == 0 && prev_val > 0;
+}
+
+bool Image::XORSprite(int c, int r, int height, uint8_t* sprite){
+    bool pixel_was_disabled = false;
+    for (int y = 0; y < height; y++){
+        int current_r = r + y;
+        while (current_r >= rows_)
+        {
+            current_r -= rows_;
+        }
+        uint8_t sprite_byte = sprite[y];
+        for (int x = 0; x < 8; x++){
+            int current_c = c + x;
+            while (current_c >= cols_){current_c -= cols_;}
+            //we scan from MSbit to LSbit see notes
+            uint8_t sprite_val = (sprite_byte & (0x80 >> x)) >> (7-x);
+            pixel_was_disabled |= XOR(current_c, current_r, sprite_val);
+        }  
+    } 
+    return pixel_was_disabled;
+}
+//we have to be precise whether we extract the bits as 1 or 0
+// our image class supports 0 - 255 our XOR's could 
+//get messy without the restriction
+//now we just need to extract the parameters needed to call XORSprite
