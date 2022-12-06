@@ -1,8 +1,8 @@
-CXX=g++
-SDL2CFLAGS=-I/usr/local/include/SDL2 -D_THREAD_SAFE
-CXXFLAGS=-O2 -c --std=c++14 -Wall $(SDL2CFLAGS)
+CXX = g++
+SDL2CFLAGS = -I/opt/homebrew/include/SDL2 -D_THREAD_SAFE
+CXXFLAGS = -O2 -c --std=c++14 -Wall $(SDL2CFLAGS)
 # dynamic libs
-LDFLAGS=-L/usr/local/lib -lSDL2
+LDFLAGS = -L/opt/homebrew/lib -lSDL2
 
 
 main.o: main.cpp
