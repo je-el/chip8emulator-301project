@@ -15,7 +15,9 @@ class cpuchip8{
         
         cpuchip8() : frame_(kFrameWidth, kFrameHeight){}        
         
-        
+        void cpuchip8::SetKeypad(uint8_t* keys);
+        void cpuchip8::Start();
+        void cpuchip8::Stop();
         int Initialize(const std::string& rom);
 
         void runcycle();

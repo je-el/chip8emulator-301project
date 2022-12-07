@@ -77,7 +77,7 @@
 		.byte 0xF0, 0x80, 0xF0, 0x80, 0x80  #; F
 		.zero PROGRAM_SIZE - 0x50
 
-	#; We also keep track of an intermeiate buffer where bits
+	#; We also keep track of an intermediate buffer where bits
 	#; represent whether to draw something or not. For this
 	#; reason we only need (64*32)/8 -> 256 bytes.
 	screenbuffer: .zero 0x100
@@ -107,7 +107,8 @@
 	#; Temporary variable for local stuff
 	tmp: .space 8
 
-.section .rodata
+.section .rodata 
+	#; issues with rodata is that it will not run on MacOS terminal so this program may be nixed
     #; for .rodata section it is for constant data
 	#; Some Read Only data such as error messages, title, etc.
 	title: .string "CHIP-8"

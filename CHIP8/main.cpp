@@ -8,36 +8,100 @@
 
 //chip 8 class will hold onto the state of the machine and interpreter 
 void RUN() {
-    int width = 64;
-    int height = 32;
+  int emulated_width = 64;
+  int emulated_height = 32;
 
-    SDLViewer viewer("CHIP-8 Emulator",  width, height, /*window_scale=*/8);
-        uint8_t* rgb24 = static_cast<uint8_t*>(std::calloc(width * height * 3, sizeof(uint8_t)));
-    viewer.SetFrameRGB24(rgb24, height);
+  SDLViewer viewer("c8-emu", emulated_width, emulated_height, 8);
+  std::mutex frame_mutex; // protects rgb24
+  uint8_t* rgb24 = static_cast<uint8_t*>(std::calloc(
+      emulated_width * emulated_height * 3, sizeof(uint8_t)));
+  viewer.SetFrameRGB24(rgb24, emulated_height);
 
-    cpuchip8 cpu;
-    cpu.Initialize("/path/to/program/file");
-    bool quit = false;
-    while (!quit) {
-        cpu.runcycle();
-        cpu.GetFrame()->CopyToRGB24(rgb24, /*r=*/255, /*g=*/0, /*b=*/0);
-        viewer.SetFrameRGB24(rgb24, height);
-        auto events = viewer.Update();
+  std::mutex events_mutex; // protects events
+  std::vector<SDL_Event> events;
 
-        for (const auto& e : events) {
-            if (e.type == SDL_QUIT) {
-                quit = true;
-            }
+  cpuchip8::Options cpu_options;
+  cpu_options.rom_filename = "/Users/jewelmaldonado/Desktop/roms/IBM";
+  
+  cpu_options.produce_frame_callback =
+    [emulated_height, rgb24, &frame_mutex, &viewer](Image* cpu_img) {
+      const std::lock_guard<std::mutex> frame_lock(frame_mutex);
+      cpu_img->CopyToRGB24(rgb24, 255, 20, 20);
+      viewer.SetFrameRGB24(rgb24, emulated_height);
+  }; 
+  cpu_options.set_keypad_state_callback = [&events, &events_mutex](uint8_t* cpu_keypad) {
+    const std::lock_guard<std::mutex> events_lock(events_mutex);
+    for (const auto& e : events) {
+      if (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP) {
+        if (e.key.keysym.sym == SDLK_1) {                        
+          cpu_keypad[0] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_2) {                        
+          cpu_keypad[1] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_3) {                        
+          cpu_keypad[2] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_4) {                        
+          cpu_keypad[3] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_q) {                        
+          cpu_keypad[4] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_w) {                        
+          cpu_keypad[5] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_e) {                        
+          cpu_keypad[6] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_r) {                        
+          cpu_keypad[7] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_a) {                        
+          cpu_keypad[8] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_s) {                        
+          cpu_keypad[9] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_d) {                        
+          cpu_keypad[10] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_f) {                        
+          cpu_keypad[11] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_z) {                        
+          cpu_keypad[12] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_x) {                        
+          cpu_keypad[13] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_c) {                        
+          cpu_keypad[14] = e.type == SDL_KEYDOWN;
+        } else if (e.key.keysym.sym == SDLK_v) {                        
+          cpu_keypad[15] = e.type == SDL_KEYDOWN;
         }
+      }
+    }
+  };
+  cpuchip8 cpu(cpu_options);
+
+  cpu.Start();
+  bool quit = false;
+  while (!quit) {
+    auto new_events = viewer.Update();
+    for (const auto& e : new_events) {
+      if (e.type == SDL_QUIT) {
+        quit = true;
+        continue;
+      }
+    }
+
+    {
+      const std::lock_guard<std::mutex> events_lock(events_mutex);
+      events.insert(events.end(), new_events.begin(), new_events.end());
+    }
+
+    // Give the CPU thread time to run.
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
+  cpu.Stop();
+
+  free(rgb24);
 }
 
 int main(int argc, char** argv)
 {
-    try{ RUN(); } 
+    try{ RUN(); 
+      std::cout << "Exiting main() successfully";} 
     catch (const std::exception& e){
-        std::cerr << "ERROR: "<< e.what();
-        return 1; }
+      std::cerr << "ERROR: "<< e.what();
+      return 1; }
         
 }
 

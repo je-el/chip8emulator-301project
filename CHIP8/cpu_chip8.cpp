@@ -88,6 +88,15 @@ void cpuchip8::runcycle() {
     } else { throw std::runtime_error("Couldn't find that instruction for opcode " + std::to_string(current_opcode_));
     }
     //now to update sound and delay timerds
+     // Update timers
+    num_cycles_++;
+    if (num_cycles_ % 9 == 0) {
+      if (delay_timer_ > 0) delay_timer_--;
+      if (sound_timer_ > 0) {
+        std::cout << "BEEPING" << std::endl;
+        sound_timer_--;
+      }
+    }
 }
 /* with runcycle we don't alter the prorgam counter
 as this is done function by function
@@ -287,4 +296,24 @@ cpuchip8::Instruction cpuchip8::GenDraw(uint8_t reg_x, uint8_t reg_y, uint8_t n_
         v_registers_[0xF] = pixels_unset;
         NEXT;
     };
+}
+
+void cpuchip8::SetKeypad(uint8_t* keys){
+  std::memcpy(keypad_state_,keys,16);
+}
+void cpuchip8::Start() {
+  if (running_.load()) throw std::runtime_error("Cannot call Start() twice.");
+  running_ = true;
+  cpu_thread_ = std::thread([this]() {
+    Initialize();
+    LoadROM(options_.rom_filename);
+    EmulationLoop();
+  });
+}
+
+void cpuchip8::Stop() {
+  if (!running_.load()) throw std::runtime_error("Must Start() before Stop()");
+  running_ = false;
+  // Wait for execution to pick up on the notification.
+  cpu_thread_.join();
 }
