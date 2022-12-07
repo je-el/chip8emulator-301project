@@ -8,7 +8,7 @@
 
 #include "common_headers.h"
 #include "Image.h"
-class cpuchip8 {
+class cpuchip8{
     public:
         static constexpr int kFrameWidth = 64;
         static constexpr int kFrameHeight = 32;
@@ -16,7 +16,8 @@ class cpuchip8 {
         cpuchip8() : frame_(kFrameWidth, kFrameHeight){}        
         
         
-        void Initialize(const std::string& rom);
+        int Initialize(const std::string& rom);
+
         void runcycle();
         
     private:
@@ -27,7 +28,7 @@ class cpuchip8 {
         void BUILDinstructionset();
 
         using Instruction = std::function<void(void)>;
-        std::unordered_map < uint16_t, Instruction >> instructions_;
+        std::unordered_map < uint16_t, Instruction > instructions_;
 
         uint16_t current_opcode_;
 

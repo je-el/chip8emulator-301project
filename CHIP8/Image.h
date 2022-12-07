@@ -16,8 +16,9 @@ class Image {
         void SetAll(uint8_t value);
 
         void DrawToStdout();
-
-        //void XOR(int c, int r, uint8_t val);
+        bool XORSprite(int c, int r, int height, uint8_t* sprite);
+        void CopyToRGB24(uint8_t* dst, int red_scale, int green_scale, int blue_scale);
+        void XOR(int c, int r, uint8_t val);
 
     private:
         int cols_;

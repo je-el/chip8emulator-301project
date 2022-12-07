@@ -63,4 +63,17 @@ of the operation used for the sprites
 are drawn over oneanother
 so that is why we use the xor operation
 
-MSbit to LSbit
+//Image.cpp NOtes:
+//we will use drawto std out for now sp we can draw graphically to the console
+// just until we set up the actual output
+
+
+//see notes at #drawing to the console
+//the interpreter also need to recieve back whether ot not  a pixel was turned off
+// this i sused for collision detection
+//remmeber that we xor to draw over with the sprites
+
+//we have to be precise whether we extract the bits as 1 or 0
+// our image class supports 0 - 255 our XOR's could 
+//get messy without the restriction
+//now we just need to extract the parameters needed to call XORSprite

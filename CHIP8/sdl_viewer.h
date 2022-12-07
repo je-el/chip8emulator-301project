@@ -2,7 +2,8 @@
 #define SDL_VIEWER_H_
 
 #include <mutex>
-#include <SDL2/SDL.h> 
+#include <SDL2/SDL.h>
+ 
 
 #include "common_headers.h"
 //#include "sdl_timer.h"

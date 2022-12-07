@@ -53,6 +53,17 @@ bool Image::XOR(int c, int r, uint8_t val){
     return current_val == 0 && prev_val > 0;
 }
 
+void Image::CopyToRGB24(uint8_t* dst, int red_scale, int green_scale, int blue_scale) {
+  int cols = Cols();
+  for (int row = 0; row < Rows(); row++) {
+    for (int col = 0; col < cols; col++) {
+      dst[(row * cols + col) * 3] = At(col, row) * red_scale;
+      dst[(row * cols + col) * 3 + 1] = At(col, row) * green_scale;
+      dst[(row * cols + col) * 3 + 2] = At(col, row) * blue_scale;
+    }
+  }
+ }
+
 bool Image::XORSprite(int c, int r, int height, uint8_t* sprite){
     bool pixel_was_disabled = false;
     for (int y = 0; y < height; y++){
