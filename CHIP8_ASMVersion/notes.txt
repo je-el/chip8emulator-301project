@@ -1,4 +1,0 @@
-The issues that are ran into whlie utilizing Lonami's Assembly code that 
-should be meant for multiplatform usage is the new MacOS Environment
-this prevents the usage of .rodata which is necessary in the build to 
-call specific texts to screen
