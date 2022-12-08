@@ -34,7 +34,7 @@ Eventually I want to turn this emulator into a Worm that can break through firew
     - Great read, in depth tutorial in how to set up SDL 2 and get to actually work compared to all the other tutorials that jsut say download it and be gone.
     - Another SDL wiki as a guide: [SDL Wiki](https://wiki.libsdl.org/SDL2/SDL_PixelFormatEnum)  
 - [River Gillis Tutorial for creating a CHIP-8 Interpreter and virtual machine to run it](https://riv.dev/emulating-a-computer-part-1/)
-    - Absolutely perfect research that gave me the hope I needed to make this work for me
+    - Absolutely perfect article that guided me through understanding how to implement chip-8 using c++
 - [Assembler Directives(GNU)](https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_7.html)
 - [Cowgod's Chip-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM) 
 
