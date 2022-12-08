@@ -4,7 +4,7 @@ My CHIP8 interpretor /virtual machine
   
 For Main Project Code look at [CHIP8](https://github.com/je-el/chip8emulator-301project/tree/main/CHIP8)  
   
-*In reality this is all simulation.* *(I say as a jest pointing toward my unused video game consoles)*  
+
 #### My Goals, Milestones, and Thoughts 
 My main goal in this project is to understand how the interpretor works and in what ways I could possibly improve it. My main struggle when I began this project was finding information on how to make it work on my Mac OS systems. As I mainly use Mac Computers. After researching the technical references via [CowGods Chip8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM) and following along with [River Gillis Tutorial for creating a CHIP-8 Interpreter and virtual machine to run it](https://riv.dev/emulating-a-computer-part-1/) I felt that I was ready enough to begin exploring more possiblities with the Chip8 Interpreter.  
 In the near future I plan on using the Emulator/Interpreter to create a firewall worm, and I will keep track of that progress in a repo that will fork this project over.  
