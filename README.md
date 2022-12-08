@@ -14,7 +14,7 @@ This Project was made using lots of tutorials and is heavily commented on so tha
 Originally I wanted this to work as expected and write it in complete asm, but as I went along I kept running into issues.  
 Whether it be technical issues with the fact that I was writing this entirely on a MacOS system and it not compiling or just running into the issue of understanding why the assembly was taking so long to write.  
 Eventually I opted for writing the program in C++ and following three seperate tutorials to understand what was actually happening with the creation of the opcodes in the program. I hope that all of my comments will be useful for someone else in understanding what is going on when they write an emulator.   
-Completing a CHIP-8 Emulator is a very ambitious project to complete in only three weeks, I wish I would have opted to complete just running the opcode itself in assembly compared to creating the opcode, creating a 16 register stack and utilizign the opcodes as intended. 
+Completing a CHIP-8 Emulator is a very ambitious project to complete in only five weeks as a full-time student, I wish I would have opted to complete just running the opcode itself in assembly compared to creating the opcode, creating a 16 register stack and utilizign the opcodes as intended. 
 
 ###### Future Planning:
 In the future I plan on using the completed emulator project to create a firewall worm. Or even to create a converter that will be able to translate from one programming language to another.
