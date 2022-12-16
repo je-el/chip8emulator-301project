@@ -28,7 +28,7 @@ In the end, I opted for writing the program in C++ and following three seperate 
 Completing a CHIP-8 Emulator is a very ambitious project to complete in only five weeks as a full-time student, I wish I would have opted to complete just running the opcode itself in assembly compared to creating the opcode, creating a 16 register stack and utilizing the opcodes as intended. 
 
 ###### Future Planning:
-In the future I plan on using the completed emulator project to create a firewall worm. Or even to create a converter that will be able to translate from one programming language to another. But with what I've learned in creating this interpreter is that it won't be an easy task.
+In the future I plan on using the completed emulator project to create a firewall worm. Or even to create a compiler/translator that will be able to translate from one programming language to another. But with what I've learned in creating this interpreter is that it won't be an easy task.
 Eventually I want to turn this emulator into a Worm that can break through firewalls, as I think that might be an interesting project to work on.  
 
 
