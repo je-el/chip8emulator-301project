@@ -5,10 +5,10 @@ CC = g++
 CFLAGS = -Wall -std=c++17
 
 # SDL2 compiler flags (sdl2-config)
-SDL_CFLAGS = $(shell sdl2-config --cflags)
+SDL_CFLAGS = -I/opt/homebrew/include/SDL2 -D_THREAD_SAFE #$(shell sdl2-config --cflags)
 
 # SDL2 linker flags (using sdl2-config)
-SDL_LDFLAGS = $(shell sdl2-config --libs)
+SDL_LDFLAGS = -L/opt/homebrew/lib -lSDL2 #$(shell sdl2-config --libs)
 
 # Target executable file
 chip8: main.o chip8.o trap
