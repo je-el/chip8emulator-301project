@@ -2,7 +2,7 @@
 ## About
 My CHIP8 interpretor /virtual machine  
   
-For Main Project Code look at [CHIP8](https://github.com/je-el/chip8emulator-301project/tree/main/CHIP_8C)  
+For Main Project Code look at [CHIP_8](https://github.com/je-el/chip8emulator-301project/tree/main/CHIP_8)  
   
 ### Requirements
 - SDL2 for graphics
