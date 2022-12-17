@@ -1,6 +1,4 @@
-#define CHIP8_H_
-#ifndef CHIP8_H_
-
+//chip8.h
 class chip8{
     public:
         void initialize();//initialize registers and mem 
@@ -40,6 +38,5 @@ class chip8{
 
 
 
-}
+};
 
-#endif
