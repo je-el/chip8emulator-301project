@@ -8,31 +8,6 @@ For Main Project Code look at [CHIP8](https://github.com/je-el/chip8emulator-301
 - SDL2 for graphics
 - C++
 - Understanding of CHIP-8's opcodes, and structure.
-  
-  
-#### My Goals, Milestones, and Thoughts  
-My main goal in this project is to understand how the interpretor works and in what ways I could possibly improve it. My main struggle when I began this project was finding information on how to make it work on my Mac OS systems. As I mainly use Mac Computers. After researching the technical references via [CowGods Chip8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM) and following along with [River Gillis Tutorial for creating a CHIP-8 Interpreter and virtual machine to run it](https://riv.dev/emulating-a-computer-part-1/) I felt that I was ready enough to begin exploring more possiblities with the Chip8 Interpreter.  
-In the near future I plan on using the Emulator.
-This Project was made using lots of tutorials and is heavily commented on so that I can gauge an understanding of the functionality of each line of code. 
-
-By the end of reading the tutorial I realized that I understood what was happening only half of the time and the code that I was running hadn't felt complete at all and when I thought it was ready to compile the console simple pooped its pants.
-  
-  
-##### Final Comment:
-Originally I wanted this to work as expected and write it in complete asm, but as I went along I kept running into issues.  
-Whether it be technical issues with the fact that I was writing this entirely based off of others knowledge compared to writing the opcodes to my own understand or the issue of the program not printing to the terminal console becasue my files were linked incorrectly to one another.  
-I'm planning to tackle the project in a new light in the following days before submitting th efinal polished code, as I've come to understand my shortcomings, the final codeed project will incllude the chip 8 interpreter in simpler terms and shorter code blocks. I may or may not implement the Graphics for the project by the turn-in date but the final code should be able to perform simple tasks without the need of a graphics renderer.
-
-
-In the end, I opted for writing the program in C++ and following three seperate tutorials to understand what was actually happening with the creation of the opcodes in the program. I hope that all of my comments will be useful for someone else in understanding what is going on when they write an emulator.   
-Completing a CHIP-8 Emulator is a very ambitious project to complete in only five weeks as a full-time student, I wish I would have opted to complete just running the opcode itself in assembly compared to creating the opcode, creating a 16 register stack and utilizing the opcodes as intended. 
-
-###### Future Planning:
-In the future I plan on using the completed emulator project to create a firewall worm. Or even to create a compiler/translator that will be able to translate from one programming language to another. But with what I've learned in creating this interpreter is that it won't be an easy task.
-Eventually I want to turn this emulator into a Worm that can break through firewalls, as I think that might be an interesting project to work on.  
-
-
-
 
 
 ## References/Resources:
